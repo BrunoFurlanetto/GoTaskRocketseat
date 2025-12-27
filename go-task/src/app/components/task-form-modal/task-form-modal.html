@@ -1,1 +1,28 @@
-<p>task-form-modal works!</p>
+<div class="bg-black opacity-70 w-full h-full absolute z-10"></div>
+<div class="absolute w-full h-full z-10 flex px-2">
+    <div class="rounded-xl overflow-hidden bg-white w-4xl m-auto max-w-3xl">
+        <form>
+            <div class="flex items-center gap-1 p-4">
+                <img src="/images/icon-new-task.svg" alt=""/>
+                <h1 class="font-semibold text-lg">Create task</h1>
+                <img class="ml-auto cursor-pointer" src="/images/icon-close.svg" alt=""/>
+            </div>
+            <div class="border-t-2 border-t-gray-200 border-b-2 border-b-gray-200 p-4 flex flex-col gap-6">
+                <div class="flex flex-col gap-1">
+                    <label class="font-bold" for="id_name">Name</label>
+                    <input class="border-1 border-gray-300 p-3 rounded-xl" type="text" name="name" id="id_name" placeholder="Give a name for your task" />
+                    <p class="text-red-500 text-sm pl-1 font-semibold">Paragraph for field error message</p>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="font-bold" for="id-description">Description</label>
+                    <textarea class="border-1 border-gray-300 p-3 rounded-xl resize-none" type="text" name="description" id="id-description" placeholder="Describe your task" ></textarea>
+                    <p class="text-red-500 text-sm pl-1 font-semibold">Paragraph for field error message</p>
+                </div>
+            </div>
+            <div class="flex justify-end gap-4 p-4">
+                <button class="p-3 font-bold bg-[#FAFAFA] rounded-xl cursor-pointer" type="button">Cancel</button>
+                <button class="p-3 font-semibold text-white bg-[#2A89EF] rounded-xl cursor-pointer active:translate-y-0.5 transition-transform duration-100 shadow-md shadow-blue-500/50" type="submit">Create a task</button>
+            </div>
+        </form>
+    </div>
+</div>
