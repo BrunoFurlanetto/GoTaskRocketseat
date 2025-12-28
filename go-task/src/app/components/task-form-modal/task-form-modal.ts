@@ -10,5 +10,4 @@ import {TaskFormModalDataInterface} from '../../interfaces/task-form-modal-data-
 })
 export class TaskFormModal {
     readonly _data: TaskFormModalDataInterface = inject(DIALOG_DATA)
-
 }
