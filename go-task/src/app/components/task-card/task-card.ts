@@ -15,6 +15,13 @@ export class TaskCard {
     }
 
     protected openEditTaskModal() {
-        this._openModalService.openEditTaskModal()
+        const dialogRef = this._openModalService.openEditTaskModal({
+            name: 'Sample Task',
+            description: 'Sample Task Description',
+        })
+
+        dialogRef.closed.subscribe((taskForm) => {
+            console.log(taskForm)
+        })
     }
 }
