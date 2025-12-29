@@ -7,6 +7,8 @@ import {Observable} from 'rxjs';
 import {AsyncPipe, JsonPipe} from '@angular/common';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {TypeTaskStatus} from '../../types/type-task-status';
+import {DialogRef} from '@angular/cdk/dialog';
+import {ModalControllerService} from '../../services/modal-controller-service';
 
 @Component({
   selector: 'app-task-list-section',
@@ -27,6 +29,7 @@ export class TaskListSection {
     protected readonly doneList$: Observable<TaskInterface[]> = this._taskService.doneTasks
 
     protected readonly TaskStatusEnum = TaskStatusEnum;
+    protected readonly _modalController = inject(ModalControllerService)
 
     onCardDrop(event: CdkDragDrop<TaskInterface[]>) {
         this.moveCardToColumn(event)
@@ -53,7 +56,7 @@ export class TaskListSection {
 
     private updateTaskStatus(taskId: string, taskCurrentStatus: TypeTaskStatus, droppedColumn: string) {
         let taskNextStatus: TypeTaskStatus;
-        console.log(droppedColumn)
+
         switch (droppedColumn) {
             case 'todo-list':
                 taskNextStatus = TaskStatusEnum.TODO
@@ -67,7 +70,7 @@ export class TaskListSection {
             default:
                 throw Error('Unknown column dropped into')
         }
-        console.log(taskNextStatus)
+
         this._taskService.updateTaskStatus(taskId, taskCurrentStatus, taskNextStatus)
     }
 }

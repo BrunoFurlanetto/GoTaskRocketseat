@@ -3,6 +3,7 @@ import {Dialog} from '@angular/cdk/dialog';
 import {TaskFormModal} from '../components/task-form-modal/task-form-modal';
 import {TaskCommentsModal} from '../components/task-comments-modal/task-comments-modal';
 import {TaskFormControlsInterface} from '../interfaces/task-form-controls-interface';
+import {TaskInterface} from '../interfaces/task-interface';
 
 @Injectable({
     providedIn: 'root',
@@ -37,9 +38,10 @@ export class ModalControllerService {
         })
     }
 
-    openCommentTaskModal() {
+    openCommentTaskModal(taskInfos: TaskInterface) {
         return this._dialog.open(TaskCommentsModal, {
-            ...this._modalSizeOptions
+            ...this._modalSizeOptions,
+            data: taskInfos,
         })
     }
 }

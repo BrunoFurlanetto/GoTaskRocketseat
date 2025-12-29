@@ -4,6 +4,7 @@ import {CdkDrag} from '@angular/cdk/drag-drop';
 import {TaskService} from '../../services/task-service';
 import {TypeTaskStatus} from '../../types/type-task-status';
 import {TaskInterface} from '../../interfaces/task-interface';
+import {CommentInterface} from '../../interfaces/comment-interface';
 
 @Component({
   selector: 'app-task-card',
@@ -18,8 +19,8 @@ export class TaskCard {
     private readonly _taskService = inject(TaskService)
     @Input({ required: true }) task!: TaskInterface
 
-    protected openCommentTaskModal() {
-        this._openModalService.openCommentTaskModal()
+    protected openCommentTaskModal(task:TaskInterface) {
+        const dialog_ref = this._openModalService.openCommentTaskModal(task)
     }
 
     protected openEditTaskModal() {

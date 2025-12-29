@@ -5,6 +5,7 @@ import {TaskInterface} from '../interfaces/task-interface';
 import {TaskStatusEnum} from '../enums/task-status-enum';
 import {generateUniqueIdWithTimestamp} from '../utils/generate-unique-id-with-timestamp';
 import {TypeTaskStatus} from '../types/type-task-status';
+import {CommentInterface} from '../interfaces/comment-interface';
 
 @Injectable({
     providedIn: 'root',
@@ -88,6 +89,38 @@ export class TaskService {
         if (task) {
             const newTaskList = taskList.value.filter((task) => task.id !== taskId)
             taskList.next([...newTaskList])
+        }
+    }
+
+    addCommentToTask(TaskId:string, taskStatus:TypeTaskStatus, comment:CommentInterface) {
+        const taskList = this.getTaskListByStatus(taskStatus)
+        const taskIndex = taskList.value.findIndex(task => task.id === TaskId)
+
+        if (taskIndex > -1) {
+            const newTaskList = [...taskList.value]
+            const taskToUpdate = newTaskList[taskIndex]
+            const updatedComments = [...taskToUpdate.comments, comment]
+            newTaskList[taskIndex] = {
+                ...taskToUpdate,
+                comments: updatedComments,
+            }
+            taskList.next(newTaskList)
+        }
+    }
+
+    removeCommentFromTask(taskId:string, taskStatus:TypeTaskStatus, commentId:string) {
+        const taskList = this.getTaskListByStatus(taskStatus)
+        const taskIndex = taskList.value.findIndex((task:TaskInterface) => task.id === taskId)
+
+        if (taskIndex > -1) {
+            const newTaskList = [...taskList.value]
+            const taskToUpdate = newTaskList[taskIndex]
+            const updatedComments = taskToUpdate.comments.filter((comment: CommentInterface) => comment.id !== commentId)
+            newTaskList[taskIndex] = {
+                ...taskToUpdate,
+                comments: updatedComments,
+            }
+            taskList.next(newTaskList)
         }
     }
 }

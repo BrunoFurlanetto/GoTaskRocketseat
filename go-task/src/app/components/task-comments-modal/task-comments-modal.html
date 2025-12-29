@@ -6,15 +6,10 @@
     </div>
     <div class="border-t-2 border-t-gray-200 border-b-2 border-b-gray-200 p-4 flex flex-col gap-6">
         <div class="flex flex-col gap-6">
-            <h1 class="font-bold text-lg">Lorem ipsum dolor sit amet.</h1>
+            <h1 class="font-bold text-lg">{{ _task.name }}</h1>
             <div>
                 <h3 class="font-bold mb-2 text-sm">Description</h3>
-                <p class="text-justify text-base text-[#374151]">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec finibus nisl. Cras ut
-                    sem libero. Praesent dapibus egestas justo, vel efficitur leo bibendum sit amet. Cras volutpat
-                    placerat purus vitae sagittis. Nam ornare orci sit amet eros vulputate laoreet. Praesent ac
-                    tortor eget tellus posuere lacinia. Nunc vitae lorem volutpat, feugiat sem at, semper orci.
-                </p>
+                <p class="text-justify text-base text-[#374151]">{{ _task.description }}</p>
             </div>
         </div>
         <div class="bg-[#F3F4F6] rounded-xl p-5 max-h-[600px] overflow-y-scroll">
@@ -22,84 +17,29 @@
             <div class="flex gap-2">
                 <div class="w-full">
                     <input class="w-full border-1 bg-white border-gray-300 p-3 rounded-xl"
-                           placeholder="Add a new comment" type="text">
-                    <p class="text-red-500 text-sm pl-1 font-semibold">Paragraph for field error message</p>
+                           placeholder="Add a new comment" type="text" [(ngModel)]="description">
+                    @if (description.length < 5) {
+                        <p class="text-red-500 text-sm pl-1 font-semibold">A minimum of 5 characters is required.</p>
+                    }
                 </div>
                 <button
-                    class="p-3 h-max font-semibold text-white bg-[#2A89EF] rounded-xl cursor-pointer active:translate-y-0.5 transition-transform duration-100 shadow-md shadow-blue-500/50">
+                    class="p-3 h-max font-semibold text-white bg-[#2A89EF] rounded-xl cursor-pointer
+                    active:translate-y-0.5 transition-transform duration-100 shadow-md shadow-blue-500/50
+                    disabled:bg-[#D7D8D8] disabled:cursor-default disabled:pointer-events-none disabled:shadow-none"
+                    [disabled]="description.length < 5" (click)="addComment()">
                     Add
                 </button>
             </div>
-            <div class="flex flex-col gap-4 border-b-1 border-b-[#D1D5DB] py-4">
-                <p class="text-[#374151] text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit nibh, accumsan ac tempor
-                    sed, placerat at nulla. Nunc volutpat sapien et porttitor condimentum. Sed interdum turpis
-                    et est tincidunt volutpat. Integer placerat nibh eget metus mollis, et dignissim turpis
-                    dictum. In faucibus sed diam a porttitor. Aliquam malesuada est quam, in feugiat quam
-                    volutpat nec. Pellentesque tincidunt quam augue, eget cursus ipsum euismod vel. Class aptent
-                    taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                </p>
-                <div class="flex gap-4 text-xs font-normal">
-                    <p class="text-[#9CA3AF]">Commented 3 hours ago</p>
-                    <button type="button" class="underline underline-offset-2 cursor-pointer">Delete</button>
+            <!-- Comments cardas -->
+            @for (comment of _task.comments; track comment.id) {
+                <div class="flex flex-col gap-4 border-b-1 border-b-[#D1D5DB] py-4">
+                    <p class="text-[#374151] text-justify">{{ comment.description }}</p>
+                    <div class="flex gap-4 text-xs font-normal">
+                        <p class="text-[#9CA3AF]">Commented 3 hours ago</p>
+                        <button type="button" class="underline underline-offset-2 cursor-pointer" (click)="deleteComment(comment.id)">Delete</button>
+                    </div>
                 </div>
-            </div>
-            <div class="flex flex-col gap-4 border-b-1 border-b-gray-300 py-4">
-                <p class="text-[#374151] text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit nibh, accumsan ac tempor
-                    sed, placerat at nulla. Nunc volutpat sapien et porttitor condimentum. Sed interdum turpis
-                    et est tincidunt volutpat. Integer placerat nibh eget metus mollis, et dignissim turpis
-                    dictum. In faucibus sed diam a porttitor. Aliquam malesuada est quam, in feugiat quam
-                    volutpat nec. Pellentesque tincidunt quam augue, eget cursus ipsum euismod vel. Class aptent
-                    taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                </p>
-                <div class="flex gap-4 text-sm">
-                    <p class="text-[#9CA3AF]">Commented 3 hours ago</p>
-                    <button type="button" class="underline underline-offset-2 cursor-pointer">Delete</button>
-                </div>
-            </div>
-            <div class="flex flex-col gap-4 border-b-1 border-b-gray-300 py-4">
-                <p class="text-[#374151] text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit nibh, accumsan ac tempor
-                    sed, placerat at nulla. Nunc volutpat sapien et porttitor condimentum. Sed interdum turpis
-                    et est tincidunt volutpat. Integer placerat nibh eget metus mollis, et dignissim turpis
-                    dictum. In faucibus sed diam a porttitor. Aliquam malesuada est quam, in feugiat quam
-                    volutpat nec. Pellentesque tincidunt quam augue, eget cursus ipsum euismod vel. Class aptent
-                    taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                </p>
-                <div class="flex gap-4 text-sm">
-                    <p class="text-[#9CA3AF]">Commented 3 hours ago</p>
-                    <button type="button" class="underline underline-offset-2 cursor-pointer">Delete</button>
-                </div>
-            </div>
-            <div class="flex flex-col gap-4 border-b-1 border-b-gray-300 py-4">
-                <p class="text-[#374151] text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit nibh, accumsan ac tempor
-                    sed, placerat at nulla. Nunc volutpat sapien et porttitor condimentum. Sed interdum turpis
-                    et est tincidunt volutpat. Integer placerat nibh eget metus mollis, et dignissim turpis
-                    dictum. In faucibus sed diam a porttitor. Aliquam malesuada est quam, in feugiat quam
-                    volutpat nec. Pellentesque tincidunt quam augue, eget cursus ipsum euismod vel. Class aptent
-                    taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                </p>
-                <div class="flex gap-4 text-sm">
-                    <p class="text-[#9CA3AF]">Commented 3 hours ago</p>
-                    <button type="button" class="underline underline-offset-2 cursor-pointer">Delete</button>
-                </div>
-            </div>
-            <div class="flex flex-col gap-4 border-b-1 border-b-gray-300 py-4">
-                <p class="text-[#374151] text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit nibh, accumsan ac tempor
-                    sed, placerat at nulla. Nunc volutpat sapien et porttitor condimentum. Sed interdum turpis
-                    et est tincidunt volutpat. Integer placerat nibh eget metus mollis, et dignissim turpis
-                    dictum. In faucibus sed diam a porttitor. Aliquam malesuada est quam, in feugiat quam
-                    volutpat nec. Pellentesque tincidunt quam augue, eget cursus ipsum euismod vel. Class aptent
-                    taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                </p>
-                <div class="flex gap-4 text-sm">
-                    <p class="text-[#9CA3AF]">Commented 3 hours ago</p>
-                    <button type="button" class="underline underline-offset-2 cursor-pointer">Delete</button>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
