@@ -1,16 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {Header} from './components/header/header';
-import {MainContent} from './components/main-content/main-content';
-import {TaskFormModal} from './components/task-form-modal/task-form-modal';
-import {TaskCommentsModal} from './components/task-comments-modal/task-comments-modal';
+import {Component, signal} from '@angular/core';
+import {Header} from './core/layout/header/header';
+import {MainContent} from './features/tasks/components/main-content/main-content';
 
 @Component({
-  selector: 'app-root',
+    selector: 'app-root',
     imports: [Header, MainContent],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+    templateUrl: './app.html',
+    styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('go-task');
+    protected readonly title = signal('go-task');
 }

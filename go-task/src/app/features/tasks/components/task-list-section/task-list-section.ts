@@ -1,24 +1,24 @@
 import {Component, inject} from '@angular/core';
 import {TaskCard} from '../task-card/task-card';
-import {TaskService} from '../../services/task-service';
-import {TaskInterface} from '../../interfaces/task-interface';
-import {TaskStatusEnum} from '../../enums/task-status-enum';
 import {Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {TypeTaskStatus} from '../../types/type-task-status';
-import {ModalControllerService} from '../../services/modal-controller-service';
+import {TaskService} from '../../../../core/services/task-service';
+import {TaskInterface} from '../../../../domain/tasks/interfaces/task-interface';
+import {ModalControllerService} from '../../../../core/services/modal-controller-service';
+import {TypeTaskStatus} from '../../../../domain/tasks/types/type-task-status';
+import {TaskStatusEnum} from '../../../../domain/tasks/enums/task-status-enum';
 
 @Component({
-  selector: 'app-task-list-section',
+    selector: 'app-task-list-section',
     imports: [
         TaskCard,
         AsyncPipe,
         CdkDropList,
         CdkDrag,
     ],
-  templateUrl: './task-list-section.html',
-  styleUrl: './task-list-section.css',
+    templateUrl: './task-list-section.html',
+    styleUrl: './task-list-section.css',
 })
 export class TaskListSection {
     private readonly _taskService = inject(TaskService)

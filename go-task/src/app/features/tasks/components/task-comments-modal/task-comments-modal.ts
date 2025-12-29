@@ -1,10 +1,10 @@
 import {Component, inject} from '@angular/core';
-import {TaskInterface} from '../../interfaces/task-interface';
 import {DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {generateUniqueIdWithTimestamp} from '../../utils/generate-unique-id-with-timestamp';
-import {TaskService} from '../../services/task-service';
-import {CommentInterface} from '../../interfaces/comment-interface';
+import {TaskInterface} from '../../../../domain/tasks/interfaces/task-interface';
+import {TaskService} from '../../../../core/services/task-service';
+import {CommentInterface} from '../../../../domain/tasks/interfaces/comment-interface';
+import {generateUniqueIdWithTimestamp} from '../../../../shared/utils/generate-unique-id-with-timestamp';
 
 @Component({
     selector: 'app-task-comments-modal',

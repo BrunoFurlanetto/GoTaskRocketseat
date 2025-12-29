@@ -1,8 +1,8 @@
 import {Component, inject, Input} from '@angular/core';
-import {ModalControllerService} from '../../services/modal-controller-service';
-import {TaskService} from '../../services/task-service';
-import {TaskInterface} from '../../interfaces/task-interface';
 import {SlicePipe} from '@angular/common';
+import {ModalControllerService} from '../../../../core/services/modal-controller-service';
+import {TaskService} from '../../../../core/services/task-service';
+import {TaskInterface} from '../../../../domain/tasks/interfaces/task-interface';
 
 @Component({
   selector: 'app-task-card',

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, tap} from 'rxjs';
+import {TaskStatusEnum} from '../../domain/tasks/enums/task-status-enum';
 import {TaskFormControlsInterface} from '../interfaces/task-form-controls-interface';
-import {TaskInterface} from '../interfaces/task-interface';
-import {TaskStatusEnum} from '../enums/task-status-enum';
-import {generateUniqueIdWithTimestamp} from '../utils/generate-unique-id-with-timestamp';
-import {TypeTaskStatus} from '../types/type-task-status';
-import {CommentInterface} from '../interfaces/comment-interface';
+import {TaskInterface} from '../../domain/tasks/interfaces/task-interface';
+import {generateUniqueIdWithTimestamp} from '../../shared/utils/generate-unique-id-with-timestamp';
+import {TypeTaskStatus} from '../../domain/tasks/types/type-task-status';
+import {CommentInterface} from '../../domain/tasks/interfaces/comment-interface';
 
 @Injectable({
     providedIn: 'root',
