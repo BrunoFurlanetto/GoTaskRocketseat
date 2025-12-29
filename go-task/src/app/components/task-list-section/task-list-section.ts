@@ -4,10 +4,9 @@ import {TaskService} from '../../services/task-service';
 import {TaskInterface} from '../../interfaces/task-interface';
 import {TaskStatusEnum} from '../../enums/task-status-enum';
 import {Observable} from 'rxjs';
-import {AsyncPipe, JsonPipe} from '@angular/common';
+import {AsyncPipe} from '@angular/common';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {TypeTaskStatus} from '../../types/type-task-status';
-import {DialogRef} from '@angular/cdk/dialog';
 import {ModalControllerService} from '../../services/modal-controller-service';
 
 @Component({
@@ -17,7 +16,6 @@ import {ModalControllerService} from '../../services/modal-controller-service';
         AsyncPipe,
         CdkDropList,
         CdkDrag,
-        JsonPipe
     ],
   templateUrl: './task-list-section.html',
   styleUrl: './task-list-section.css',

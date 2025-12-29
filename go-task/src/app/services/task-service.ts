@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, map} from 'rxjs';
+import {BehaviorSubject, map, tap} from 'rxjs';
 import {TaskFormControlsInterface} from '../interfaces/task-form-controls-interface';
 import {TaskInterface} from '../interfaces/task-interface';
 import {TaskStatusEnum} from '../enums/task-status-enum';
@@ -11,25 +11,22 @@ import {CommentInterface} from '../interfaces/comment-interface';
     providedIn: 'root',
 })
 export class TaskService {
-    private _todoTasks$ = new BehaviorSubject<any[]>([])
-    readonly todoTasks = this._todoTasks$.asObservable() .pipe(
-        map((tasks) => {
-            return structuredClone(tasks)
-        }),
+    private _todoTasks$ = new BehaviorSubject<any[]>(this.loadTasksFromLocalStorage(TaskStatusEnum.TODO))
+    readonly todoTasks = this._todoTasks$.asObservable().pipe(
+        map((tasks) => structuredClone(tasks)),
+        tap((tasks) => this.saveTasksToLocalStorage(TaskStatusEnum.TODO, tasks))
     )
 
-    private _doingTasks$ = new BehaviorSubject<any[]>([])
+    private _doingTasks$ = new BehaviorSubject<any[]>(this.loadTasksFromLocalStorage(TaskStatusEnum.DOING))
     readonly doingTasks = this._doingTasks$.asObservable().pipe(
-        map((tasks) => {
-            return structuredClone(tasks)
-        }),
+        map((tasks) => structuredClone(tasks)),
+        tap((tasks) => this.saveTasksToLocalStorage(TaskStatusEnum.DOING, tasks))
     )
 
-    private _doneTasks$ = new BehaviorSubject<any[]>([])
+    private _doneTasks$ = new BehaviorSubject<any[]>(this.loadTasksFromLocalStorage(TaskStatusEnum.DONE))
     readonly doneTasks = this._doneTasks$.asObservable().pipe(
-        map((tasks) => {
-            return structuredClone(tasks)
-        }),
+        map((tasks) => structuredClone(tasks)),
+        tap((tasks) => this.saveTasksToLocalStorage(TaskStatusEnum.DONE, tasks))
     )
 
     addTask(taskInfos: TaskFormControlsInterface) {
@@ -44,7 +41,6 @@ export class TaskService {
     }
 
     updateTaskStatus(taskId: string, currentStatus: TypeTaskStatus, newStatus: TypeTaskStatus) {
-        let taskToUpdate: TaskInterface | undefined
         const currentTaskList = this.getTaskListByStatus(currentStatus)
         const newTaskList = this.getTaskListByStatus(newStatus)
         const currentTask = currentTaskList.value.find(task => task.id === taskId)
@@ -121,6 +117,23 @@ export class TaskService {
                 comments: updatedComments,
             }
             taskList.next(newTaskList)
+        }
+    }
+
+    private saveTasksToLocalStorage(key:string, tasks:TaskInterface[]) {
+        try {
+            localStorage.setItem(key, JSON.stringify(tasks))
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    private loadTasksFromLocalStorage(key:string) {
+        try {
+            const storedTasks = localStorage.getItem(key)
+            return storedTasks ? JSON.parse(storedTasks) : []
+        } catch (error) {
+            console.error(error)
         }
     }
 }

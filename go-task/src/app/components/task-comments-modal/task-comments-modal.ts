@@ -1,9 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {TaskInterface} from '../../interfaces/task-interface';
 import {DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
-import {JsonPipe} from '@angular/common';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {TaskFormControlsInterface} from '../../interfaces/task-form-controls-interface';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {generateUniqueIdWithTimestamp} from '../../utils/generate-unique-id-with-timestamp';
 import {TaskService} from '../../services/task-service';
 import {CommentInterface} from '../../interfaces/comment-interface';
@@ -11,7 +9,6 @@ import {CommentInterface} from '../../interfaces/comment-interface';
 @Component({
     selector: 'app-task-comments-modal',
     imports: [
-        JsonPipe,
         ReactiveFormsModule,
         FormsModule
     ],

@@ -1,15 +1,13 @@
-import {Component, inject, input, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {ModalControllerService} from '../../services/modal-controller-service';
-import {CdkDrag} from '@angular/cdk/drag-drop';
 import {TaskService} from '../../services/task-service';
-import {TypeTaskStatus} from '../../types/type-task-status';
 import {TaskInterface} from '../../interfaces/task-interface';
-import {CommentInterface} from '../../interfaces/comment-interface';
+import {SlicePipe} from '@angular/common';
 
 @Component({
   selector: 'app-task-card',
     imports: [
-        CdkDrag
+        SlicePipe
     ],
   templateUrl: './task-card.html',
   styleUrl: './task-card.css',
@@ -20,7 +18,7 @@ export class TaskCard {
     @Input({ required: true }) task!: TaskInterface
 
     protected openCommentTaskModal(task:TaskInterface) {
-        const dialog_ref = this._openModalService.openCommentTaskModal(task)
+        return this._openModalService.openCommentTaskModal(task)
     }
 
     protected openEditTaskModal() {
